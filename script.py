@@ -4,6 +4,7 @@ import os.path as path
 import os
 import re
 import unicodedata
+import requests
 
 # Output dir
 OUTDIR = "~/Desktop/pocket_links"
@@ -39,7 +40,12 @@ def slugify(value, allow_unicode=False):
 
 
 # Get response
-response = p.retrieve(offset=0, count=10)
+try:
+    response = p.retrieve(offset=0, count=10)
+except requests.exceptions.ConnectionError:
+    # print(f'GOT CONNECTION ERROR')
+    quit()
+
 l = response['list']
 resTime = response['since']
 
