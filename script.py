@@ -9,10 +9,11 @@ import unicodedata
 OUTDIR = "~/Desktop/pocket_links"
 
 # Setup api
-with open('access_token.txt') as file:
+contained_path = '/'.join(__file__.split('/')[:-1])
+with open(f'{contained_path}/access_token.txt') as file:
     access = file.read().strip()
 
-with open('consumer_key.txt') as file:
+with open(f'{contained_path}/consumer_key.txt') as file:
     consumer = file.read().strip()
 
 p = Pocket(
