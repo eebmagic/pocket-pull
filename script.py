@@ -5,6 +5,7 @@ import os
 import re
 import unicodedata
 import requests
+from datetime import datetime
 
 # Output dir
 OUTDIR = "~/Desktop/pocket_links"
@@ -61,9 +62,10 @@ for item in l:
     url = l[item]['given_url']
     title = l[item]['resolved_title']
     word_count = l[item]['word_count']
+    add_time = int(l[item]["time_added"])
     urls.append(url)
 
-    title = f'{slugify(title)}.txt'
+    title = f'{datetime.fromtimestamp(add_time).strftime("%m-%d")}_{slugify(title)}.txt'
     titles.add(title)
     filepath = os.path.join(container_path, title)
 
@@ -78,5 +80,5 @@ not_included = files - titles
 
 for file in not_included:
     if file.split('.')[-1] == 'txt':
-        print(f'Removing file: {file}')
+        # print(f'Removing file: {file}')
         os.remove(os.path.join(container_path, file))
