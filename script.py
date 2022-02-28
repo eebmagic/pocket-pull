@@ -78,5 +78,5 @@ not_included = files - titles
 
 for file in not_included:
     if file.split('.')[-1] == 'txt':
-        print(f'Removing file: {file}')
+        # print(f'Removing file: {file}')
         os.remove(os.path.join(container_path, file))
